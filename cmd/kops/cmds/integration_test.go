@@ -48,7 +48,7 @@ import (
 
 // updateClusterTestBase is added automatically to the srcDir on all
 // tests using runTest, including runTestAWS, runTestGCE
-const updateClusterTestBase = "../../tests/integration/update_cluster/"
+const updateClusterTestBase = "../../../tests/integration/update_cluster/"
 
 // TestMinimal runs the test on a minimum configuration, similar to kops create cluster minimal.example.com --zones us-west-1a
 func TestMinimal(t *testing.T) {

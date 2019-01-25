@@ -51,7 +51,7 @@ func (o *LifecycleTestOptions) AddDefaults() {
 		o.ClusterName = strings.Replace(o.SrcDir, "_", "", -1) + ".example.com"
 	}
 
-	o.SrcDir = "../../tests/integration/update_cluster/" + o.SrcDir
+	o.SrcDir = "../../../tests/integration/update_cluster/" + o.SrcDir
 }
 
 // TestLifecycleMinimal runs the test on a minimum configuration, similar to kops create cluster minimal.example.com --zones us-west-1a
