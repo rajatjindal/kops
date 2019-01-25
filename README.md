@@ -1,4 +1,4 @@
-<img src="/docs/img/logo.jpg" width="500px" alt="kops logo">
+<img src="/docs/img/logo.jpg" width="500px" alt="kops logo"> 
 
 # kops - Kubernetes Operations
 
