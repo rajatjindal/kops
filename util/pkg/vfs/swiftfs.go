@@ -310,6 +310,8 @@ func (p *SwiftPath) WriteFile(data io.ReadSeeker, acl ACL) error {
 		}
 
 		createOpts := swiftobject.CreateOpts{Content: data}
+
+		klog.V(4).Infof("client: %#v, bucket: %s, key: %s", p.client, p.bucket, p.key)
 		_, err := swiftobject.Create(p.client, p.bucket, p.key, createOpts).Extract()
 		if err != nil {
 			return false, fmt.Errorf("error writing %s: %v", p, err)
