@@ -51,6 +51,7 @@ func NewSwiftClient() (*gophercloud.ServiceClient, error) {
 		return nil, err
 	}
 
+	klog.V(2).Infof("identity endpoint for openstack is %s", authOption.IdentityEndpoint)
 	pc, err := openstack.NewClient(authOption.IdentityEndpoint)
 	if err != nil {
 		return nil, fmt.Errorf("error building openstack provider client: %v", err)
@@ -254,6 +255,7 @@ func NewSwiftPath(client *gophercloud.ServiceClient, bucket string, key string) 
 	bucket = strings.TrimSuffix(bucket, "/")
 	key = strings.TrimPrefix(key, "/")
 
+	klog.V(4).Infof("creating SwiftPath client with bucket %q and key %q", bucket, key)
 	return &SwiftPath{
 		client: client,
 		bucket: bucket,
@@ -318,7 +320,9 @@ func (p *SwiftPath) WriteFile(data io.ReadSeeker, acl ACL) error {
 		}
 
 		createOpts := swiftobject.CreateOpts{Content: data}
-		_, err := swiftobject.Create(p.client, p.bucket, p.key, createOpts).Extract()
+		klog.V(4).Infof("writing to bucket %q and key %q", p.bucket, p.key)
+		ch, err := swiftobject.Create(p.client, p.bucket, p.key, createOpts).Extract()
+		klog.V(4).Infof("createHeader %v", ch)
 		if err != nil {
 			return false, fmt.Errorf("error writing %s: %v", p, err)
 		}
