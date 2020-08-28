@@ -1,6 +1,7 @@
 package gophercloud
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -82,6 +83,10 @@ func (client *ServiceClient) Post(url string, JSONBody interface{}, JSONResponse
 		opts = new(RequestOpts)
 	}
 	client.initReqOpts(url, JSONBody, JSONResponse, opts)
+
+	fmt.Println("making Post request")
+	fmt.Println("url is ", url)
+	fmt.Printf("options is \n %#v", opts)
 	return client.Request("POST", url, opts)
 }
 
