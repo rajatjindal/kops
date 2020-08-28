@@ -95,6 +95,10 @@ func (client *ServiceClient) Put(url string, JSONBody interface{}, JSONResponse 
 	if opts == nil {
 		opts = new(RequestOpts)
 	}
+
+	fmt.Println("making PUT request")
+	fmt.Println("url is ", url)
+	fmt.Printf("options is \n %#v", opts)
 	client.initReqOpts(url, JSONBody, JSONResponse, opts)
 	return client.Request("PUT", url, opts)
 }
