@@ -1,6 +1,8 @@
 package floatingips
 
 import (
+	"fmt"
+
 	"github.com/gophercloud/gophercloud"
 	"github.com/gophercloud/gophercloud/pagination"
 )
@@ -116,6 +118,9 @@ func Create(c *gophercloud.ServiceClient, opts CreateOptsBuilder) (r CreateResul
 		r.Err = err
 		return
 	}
+
+	fmt.Println("inside Floatingip create")
+	fmt.Println(rootURL(c))
 	resp, err := c.Post(rootURL(c), b, &r.Body, nil)
 	_, r.Header, r.Err = gophercloud.ParseResponse(resp, err)
 	return
