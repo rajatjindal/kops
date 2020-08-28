@@ -121,6 +121,8 @@ func Create(c *gophercloud.ServiceClient, opts CreateOptsBuilder) (r CreateResul
 
 	fmt.Println("inside Floatingip create")
 	fmt.Println(rootURL(c))
+	fmt.Println("body is: ")
+	fmt.Println(&r.Body)
 	resp, err := c.Post(rootURL(c), b, &r.Body, nil)
 	_, r.Header, r.Err = gophercloud.ParseResponse(resp, err)
 	return
