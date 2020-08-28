@@ -5,9 +5,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/http/httputil"
 	"strings"
 	"sync"
 )
@@ -394,11 +396,17 @@ func (client *ProviderClient) doRequest(method, url string, options *RequestOpts
 
 	prereqtok := req.Header.Get("X-Auth-Token")
 
+	rbody, _ := httputil.DumpRequest(req, true)
+	fmt.Printf("request is \n%s", string(rbody))
+
 	// Issue the request.
 	resp, err := client.HTTPClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
+
+	respbody, _ := httputil.DumpResponse(resp, true)
+	fmt.Printf("response is \n%s", string(respbody))
 
 	// Allow default OkCodes if none explicitly set
 	okc := options.OkCodes
