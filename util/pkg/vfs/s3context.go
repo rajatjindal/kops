@@ -17,6 +17,7 @@ limitations under the License.
 package vfs
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -87,6 +88,12 @@ func (s *S3Context) getClient(region string) (*s3.S3, error) {
 		if endpoint == "" {
 			config = aws.NewConfig().WithRegion(region)
 			config = config.WithCredentialsChainVerboseErrors(true)
+
+			tr := &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			}
+			client := &http.Client{Transport: tr}
+			config.HTTPClient = client
 		} else {
 			// Use customized S3 storage
 			klog.Infof("Found S3_ENDPOINT=%q, using as non-AWS S3 backend", endpoint)
@@ -117,11 +124,17 @@ func getCustomS3Config(endpoint string, region string) (*aws.Config, error) {
 		return nil, fmt.Errorf("S3_SECRET_ACCESS_KEY cannot be empty when S3_ENDPOINT is not empty")
 	}
 
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+
 	s3Config := &aws.Config{
 		Credentials:      credentials.NewStaticCredentials(accessKeyID, secretAccessKey, ""),
 		Endpoint:         aws.String(endpoint),
 		Region:           aws.String(region),
 		S3ForcePathStyle: aws.Bool(true),
+		HTTPClient:       client,
 	}
 	s3Config = s3Config.WithCredentialsChainVerboseErrors(true)
 
