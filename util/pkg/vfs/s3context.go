@@ -88,6 +88,7 @@ func (s *S3Context) getClient(region string) (*s3.S3, error) {
 		if endpoint == "" {
 			config = aws.NewConfig().WithRegion(region)
 			config = config.WithCredentialsChainVerboseErrors(true)
+			config = config.WithLogLevel(aws.LogDebugWithHTTPBody)
 
 			tr := &http.Transport{
 				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -137,6 +138,7 @@ func getCustomS3Config(endpoint string, region string) (*aws.Config, error) {
 		HTTPClient:       client,
 	}
 	s3Config = s3Config.WithCredentialsChainVerboseErrors(true)
+	s3Config = s3Config.WithLogLevel(aws.LogDebugWithHTTPBody)
 
 	return s3Config, nil
 }
