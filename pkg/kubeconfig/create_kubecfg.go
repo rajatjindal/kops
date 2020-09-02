@@ -121,7 +121,7 @@ func BuildKubecfg(cluster *kops.Cluster, keyStore fi.Keystore, secretStore fi.Se
 		}
 
 		req := pki.IssueCertRequest{
-			Signer: fi.CertificateIDCA,
+			Signer: "ca",
 			Type:   "client",
 			Subject: pkix.Name{
 				CommonName:   cn,

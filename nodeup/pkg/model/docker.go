@@ -301,7 +301,7 @@ var dockerVersions = []packageVersion{
 		PackageVersion: "18.09.9",
 		PlainBinary:    true,
 		Architectures:  []architectures.Architecture{architectures.ArchitectureAmd64},
-		Source:         "https://download.docker.com/linux/static/stable/x86_64/docker-18.09.9.tgz",
+		Source:         "https://repocache.nonprod.ppops.net/artifactory/temp-generic-local/docker/18.09.9/docker-18.09.9.tgz",
 		Hash:           "82a362af7689038c51573e0fd0554da8703f0d06f4dfe95dd5bda5acf0ae45fb",
 		MapFiles: map[string]string{
 			"docker/docker*": "/usr/bin",
@@ -337,7 +337,7 @@ var dockerVersions = []packageVersion{
 		PackageVersion: "19.03.11",
 		PlainBinary:    true,
 		Architectures:  []architectures.Architecture{architectures.ArchitectureAmd64},
-		Source:         "https://download.docker.com/linux/static/stable/x86_64/docker-19.03.11.tgz",
+		Source:         "https://repocache.nonprod.ppops.net/artifactory/temp-generic-local/k8s/1.19.0/docker-19.03.11.tgz",
 		Hash:           "0f4336378f61ed73ed55a356ac19e46699a995f2aff34323ba5874d131548b9e",
 		MapFiles: map[string]string{
 			"docker/docker*": "/usr/bin",

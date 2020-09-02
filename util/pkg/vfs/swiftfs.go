@@ -132,6 +132,12 @@ func (oc OpenstackConfig) getSection(name string, items []string) (map[string]st
 }
 
 func (oc OpenstackConfig) GetCredential() (gophercloud.AuthOptions, error) {
+	os.Setenv("OS_APPLICATION_CREDENTIAL_ID", "2b3eebbe95ae4ece375c1b7")
+	os.Setenv("OS_APPLICATION_CREDENTIAL_SECRET", "kops-password")
+	os.Setenv("OS_AUTH_URL", "https://keystone.example.net:5000/v3")
+	os.Setenv("OS_DOMAIN_NAME", "ops-ldap")
+	os.Setenv("OS_REGION_NAME", "RegionOne")
+	os.Setenv("OS_PROJECT_NAME", "ProjectName")
 
 	// prioritize environment config
 	env, enverr := openstack.AuthOptionsFromEnv()
